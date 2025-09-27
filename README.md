@@ -73,7 +73,7 @@ A aplicação segue um padrão em camadas:
    [http://localhost:8080](http://localhost:8080)
 
 5. Documentação técnica OPEN API disponível em:
-  [http://localhost:8080/swagger-ui/index.html]
+   (http://localhost:8080/swagger-ui/index.html)
 
 ---
 
@@ -107,7 +107,7 @@ Authorization: Bearer <access_token>
 ## 📘 Endpoints de Produtos
 
 ### Listar com paginação
-`GET /produtos?page=0&size=5&sort=preco,desc`
+`GET v1/produtos?page=0&size=5&sort=preco,desc`
 
 Exemplo de resposta:
 ```json
@@ -137,10 +137,10 @@ Exemplo de resposta:
 ```
 
 ### Buscar por ID
-`GET /produtos/{id}`
+`GET v1/produtos/{id}`
 
 ### Criar produto
-`POST /produtos`
+`POST v1/produtos`
 ```json
 {
   "nome": "Notebook Dell Inspiron",
@@ -158,11 +158,11 @@ Exemplo de resposta:
 ```
 
 ### Atualizar produto
-`PUT /produtos/{id}`  
+`PUT v1/produtos/{id}`  
 Mesmo payload do `POST`.
 
 ### Deletar produto
-`DELETE /produtos/{id}`  
+`DELETE v1/produtos/{id}`  
 Retorna `204 No Content`.
 
 ---
@@ -183,10 +183,7 @@ Exemplo de erro ao buscar produto inexistente:
 ---
 
 ## ✅ Próximos passos sugeridos
-- Adicionar validação com `@Valid` e anotações como `@NotBlank`.  
-- Documentação Swagger/OpenAPI para facilitar consumo.  
-- Testes unitários com **JUnit 5 + MockK**.  
-- Versionamento da API (`/v1/produtos`).  
+- Adição de logs para observabilidade e criação de métricas 
 - Integração com banco real (MySQL/Postgres).  
 
 ---
