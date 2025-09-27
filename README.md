@@ -72,6 +72,9 @@ A aplicação segue um padrão em camadas:
 4. API disponível em:  
    [http://localhost:8080](http://localhost:8080)
 
+5. Documentação técnica OPEN API disponível em:
+  [http://localhost:8080/swagger-ui/index.html]
+
 ---
 
 ## 🔑 Autenticação (Login)
