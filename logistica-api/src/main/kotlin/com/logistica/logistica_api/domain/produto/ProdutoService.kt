@@ -34,7 +34,7 @@ class ProdutoService(
 
     fun deletar(id: Long) {
         if (!produtoRepository.existsById(id)) {
-            throw RuntimeException("Produto não encontrado")
+            throw EntityNotFoundException("Produto não encontrado")
         }
         produtoRepository.deleteById(id)
     }
