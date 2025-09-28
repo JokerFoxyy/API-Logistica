@@ -1,0 +1,299 @@
+{
+	"info": {
+		"_postman_id": "5aa04f42-d547-4a31-b7d1-80ca3b66581b",
+		"name": "API Logistica",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36626007"
+	},
+	"item": [
+		{
+			"name": "PRODUTO",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v1/produtos?page=0&size=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"produtos"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PRODUTO",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v1/produtos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"produtos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PRODUTO by ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v1/produtos/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"produtos",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PRODUTO",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Notebook Dell Inspiron 3\",\r\n    \"imageUrl\": \"https://example.com/dell.jpg\",\r\n    \"descricao\": \"Notebook Intel i7, 16GB RAM, SSD 512GB\",\r\n    \"preco\": 5500.0,\r\n    \"rating\": 4.5,\r\n    \"especificacoes\": {\r\n    \"Processador\": \"Intel Core i7\",\r\n    \"RAM\": \"16GB\",\r\n    \"Armazenamento\": \"SSD 512GB\"\r\n  }\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/produtos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"produtos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Authentication",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 1. Converte o corpo da resposta (JSON) em um objeto JavaScript\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"// 2. Verifica se a resposta foi bem-sucedida (status 200 OK)\r",
+							"if (pm.response.code === 200 && jsonData.token) {\r",
+							"    \r",
+							"    // 3. Extrai o valor do token\r",
+							"    var token = jsonData.token;\r",
+							"\r",
+							"    // 4. Define uma VARIÁVEL DE AMBIENTE chamada 'jwt_token' com o valor\r",
+							"    // Você pode usar pm.globals.set() se preferir variáveis globais.\r",
+							"    pm.environment.set(\"token\", token);\r",
+							"    \r",
+							"    console.log(\"Token JWT extraído e salvo: \" + token);\r",
+							"    \r",
+							"    // Opcional: Adiciona um teste para garantir que o token existe\r",
+							"    pm.test(\"Status code is 200\", function () {\r",
+							"        pm.response.to.have.status(200);\r",
+							"    });\r",
+							"    pm.test(\"Token is present\", function () {\r",
+							"        pm.expect(token).to.be.a('string').and.to.have.lengthOf.above(10);\r",
+							"    });\r",
+							"\r",
+							"} else {\r",
+							"    console.error(\"Falha ao extrair token. Resposta: \" + pm.response.text());\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"login\":\"teste\",\r\n    \"senha\":\"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PRODUTO",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Notebook Dell Inspiron\",\r\n  \"imageUrl\": \"https://example.com/dell.jpg\",\r\n  \"descricao\": \"Notebook Intel i7, 16GB RAM, SSD 512GB\",\r\n  \"preco\": 5500.0,\r\n  \"avaliacao\": 4.5,\r\n  \"especificacoes\": {\r\n    \"Processador\": \"Intel Core i7\",\r\n    \"RAM\": \"16GB\",\r\n    \"Armazenamento\": \"SSD 512GB\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/produtos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"produtos"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "",
+			"type": "default"
+		}
+	]
+}

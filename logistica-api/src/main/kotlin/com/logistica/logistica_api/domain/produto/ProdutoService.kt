@@ -16,14 +16,8 @@ class ProdutoService(
         produtoRepository.findById(id).orElseThrow { EntityNotFoundException("Produto não encontrado") }
 
     fun criar(dto: ProdutoDTO): Produto {
-        val produto = Produto(
-            nome = dto.nome,
-            preco = dto.preco,
-            imageUrl = dto.imageUrl,
-            descricao = dto.descricao,
-            avaliacao=dto.avaliacao,
-            especificacoes=dto.especificacoes
-        )
+        val produto = ProdutoBuilder.fromDTO(dto)
+
         return produtoRepository.save(produto)
     }
 

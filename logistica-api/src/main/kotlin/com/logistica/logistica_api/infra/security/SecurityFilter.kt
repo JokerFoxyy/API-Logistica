@@ -25,7 +25,6 @@ class SecurityFilter(
         filterChain: FilterChain
     ) {
         val tokenJWT = recuperarToken(request)
-        println("INICIANDO FILTER!!!")
 
         if (tokenJWT != null) {
             val subject = tokenService.getSubject(tokenJWT)

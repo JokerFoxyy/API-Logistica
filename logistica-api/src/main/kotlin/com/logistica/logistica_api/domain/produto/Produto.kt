@@ -16,7 +16,7 @@ data class Produto(
     var imageUrl: String = "",
 
     @Column(nullable = false, length = 1000)
-    var descricao: String = "",
+    var descricao: String? = "",
 
     @Column(nullable = false)
     var preco: BigDecimal = BigDecimal.ZERO,
@@ -27,6 +27,6 @@ data class Produto(
     @ElementCollection
     @CollectionTable(name = "produto_especificacoes", joinColumns = [JoinColumn(name = "produto_id")])
     @Column(name = "especificacao")
-    var especificacoes: List<String> = mutableListOf()
+    var especificacoes: Map<String, String> = emptyMap()
 )
 

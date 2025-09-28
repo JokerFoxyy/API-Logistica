@@ -2,6 +2,7 @@ package com.logistica.logistica_api.controller
 import com.logistica.logistica_api.domain.produto.ProdutoService
 import com.logistica.logistica_api.domain.produto.Produto
 import com.logistica.logistica_api.domain.produto.ProdutoDTO
+import jakarta.validation.Valid
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
@@ -21,7 +22,7 @@ data class Product(
 )
 
 @RestController
-@RequestMapping("/produtos")
+@RequestMapping("v1/produtos")
 class ProdutoController(
     private val produtoService: ProdutoService
 ) {
@@ -35,7 +36,7 @@ class ProdutoController(
         ResponseEntity.ok(produtoService.buscarPorId(id))
 
     @PostMapping
-    fun criarProduto(@RequestBody dto: ProdutoDTO): ResponseEntity<Produto> {
+    fun criarProduto(@RequestBody @Valid dto: ProdutoDTO): ResponseEntity<Produto> {
         val novoProduto = produtoService.criar(dto)
         return ResponseEntity.status(HttpStatus.CREATED).body(novoProduto)
     }
